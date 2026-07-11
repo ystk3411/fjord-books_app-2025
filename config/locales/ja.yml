@@ -29,4 +29,8 @@ ja:
     submit:
       create: "%{model}を登録する"
       update: "%{model}を更新する"
-
+  flash:
+    posts:
+      create: "%{item}を追加しました"
+      update: "%{item}を更新しました"
+      destroy:  "%{item}を削除しました"
