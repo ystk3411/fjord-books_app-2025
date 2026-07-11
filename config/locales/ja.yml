@@ -34,3 +34,4 @@ ja:
       create: "%{item}を追加しました"
       update: "%{item}を更新しました"
       destroy:  "%{item}を削除しました"
+      
