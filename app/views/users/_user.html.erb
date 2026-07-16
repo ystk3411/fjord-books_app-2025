@@ -1,0 +1,27 @@
+<div id="<%= dom_id user %>">
+  <p>
+    <strong><%= User.human_attribute_name(:email) %>:</strong>
+    <%= user.email %>
+  </p>
+
+  <p>
+    <strong><%= User.human_attribute_name(:post_code) %>:</strong>
+    <%= user.post_code %>
+  </p>
+
+  <p>
+    <strong><%= User.human_attribute_name(:prefecture_code) %>:</strong>
+    <%= user.prefecture_code %>
+  </p>
+
+  <p>
+    <strong><%= User.human_attribute_name(:city) %>:</strong>
+    <%= user.city %>
+  </p>
+
+  <p>
+    <strong><%= User.human_attribute_name(:street) %>:</strong>
+    <%= user.street %>
+  </p>
+
+</div>
