@@ -39,11 +39,13 @@ en:
         picture: picture  #g
         title: title  #g
 
-  text:
-    header:
-      books: Books  #g
-      new: New Book  #g
-      edit: Edit Book  #g
+  books:
+    index:
+      title: Books
+    new:
+      title: New Book
+    edit:
+      title: Edit Book  #g
 
   link:
     show: Show this book  #g

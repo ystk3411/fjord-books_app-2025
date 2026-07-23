@@ -10,11 +10,13 @@ ja:
         picture: 写真  #g
         title: タイトル  #g
 
-  text:
-    header:
-      books: 本一覧  #g
-      new: 本を追加  #g
-      edit: 本を編集  #g
+  books:
+    index:
+      title: 本一覧
+    new:
+      title: 本を追加
+    edit:
+      title: 本を編集  #g
 
   link:
     show: この本を開く  #g

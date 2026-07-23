@@ -1,6 +1,6 @@
-<% content_for :title, "New book" %>
+<% content_for :title, t('.title') %>
 
-<h1><%= t('text.header.new') %></h1>
+<h1><%= t('.title') %></h1>
 
 <%= render "form", book: @book %>
 
