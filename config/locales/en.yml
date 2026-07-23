@@ -30,14 +30,14 @@
 en:
   activerecord:
     models:
-      book: Book  #g
+      book: Book
 
     attributes:
       book:
-        author: author  #g
-        memo: memo  #g
-        picture: picture  #g
-        title: title  #g
+        author: author
+        memo: memo
+        picture: picture
+        title: title
 
   books:
     index:
@@ -45,16 +45,16 @@ en:
     new:
       title: New Book
     edit:
-      title: Edit Book  #g
+      title: Edit Book
 
   link:
-    show: Show this book  #g
-    new: New book  #g
-    edit: Edit this book  #g
-    back: Back to books  #g
+    show: Show this book
+    new: New book
+    edit: Edit this book
+    back: Back to books
   
   button:
-    delete: Destroy this book  #g
+    delete: Destroy this book
 
   helpers:
     submit:

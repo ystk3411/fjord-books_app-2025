@@ -1,14 +1,14 @@
 ja:
   activerecord:
     models:
-      book: 本  #g
+      book: 本
 
     attributes:
       book:
-        author: 著者  #g
-        memo: メモ  #g
-        picture: 写真  #g
-        title: タイトル  #g
+        author: 著者
+        memo: メモ
+        picture: 写真
+        title: タイトル
 
   books:
     index:
@@ -16,16 +16,16 @@ ja:
     new:
       title: 本を追加
     edit:
-      title: 本を編集  #g
+      title: 本を編集
 
   link:
-    show: この本を開く  #g
-    new: 本を追加  #g
-    edit: 本を編集  #g
-    back: 戻る  #g
+    show: この本を開く
+    new: 本を追加
+    edit: 本を編集
+    back: 戻る
   
   button:
-    delete: 本を削除  #g
+    delete: 本を削除
 
   helpers:
     submit:
