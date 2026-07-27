@@ -61,9 +61,9 @@ en:
       create: "Create %{model}"
       update: "Update %{model}"
   flash:
-    posts:
-      create: "%{item} was successfully created."
-      update: "%{item} was successfully updated."
-      destroy:  "%{item} was successfully destroyed."
+    model:
+      create: "%{model} was successfully created."
+      update: "%{model} was successfully updated."
+      destroy:  "%{model} was successfully destroyed."
 
   hello: "Hello world"
