@@ -10,6 +10,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[8.0]
       t.string :prefecture_code
       t.string :city
       t.string :street
+      t.string :introduction
 
       ## Recoverable
       t.string   :reset_password_token
