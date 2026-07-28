@@ -36,4 +36,3 @@ ja:
       create: "%{model}を追加しました"
       update: "%{model}を更新しました"
       destroy:  "%{model}を削除しました"
-      
