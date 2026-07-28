@@ -7,11 +7,9 @@
   <% @users.each do |user| %>
     <div class="index-item">
       <%= render user %>
-      <% if user.id == current_user.id %>
-        <p>
-          <%= link_to t('views.common.show', name: user.model_name.human.downcase), user %>
-        </p>
-      <% end %>
+      <p>
+        <%= link_to t('views.common.show', name: user.model_name.human.downcase), user %>
+      </p>
     </div>
   <% end %>
 </div>
