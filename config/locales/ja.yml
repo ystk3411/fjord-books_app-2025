@@ -195,6 +195,10 @@ ja:
       title_edit: "%{name}の編集"
       error: エラー
       validation_error: "%{errors}があるため、この%{name}は保存できませんでした"
+      sign_up: アカウント登録
+      sign_in: ログイン
+      signed_out: ログアウト
+      edit_profile: プロフィールを編集
     pagination:
       first: '« 最初'
       last: '最後 »'

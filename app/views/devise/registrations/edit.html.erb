@@ -1,44 +1,44 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<h2><%= t('.title', resource: User.model_name.human) %></h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <p><%= f.label :email %></p>
-    <p><%= f.email_field :email, autofocus: true, autocomplete: "email" %></p>
+    <%= f.label :email, User.human_attribute_name(:email) %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
 
   <div class="field">
-    <p><%= f.label :post_code %></p>
+    <p><%= f.label :post_code, User.human_attribute_name(:post_code) %></p>
     <p><%= f.text_field :post_code, autofocus: true, autocomplete: "post-code" %></p>
   </div>
 
   <div class="field">
-    <p><%= f.label :prefecture_code %></p>
+    <p><%= f.label :prefecture_code, User.human_attribute_name(:prefecture_code) %></p>
     <p><%= f.text_field :prefecture_code, autofocus: true, autocomplete: "prefecture-code" %></p>
   </div>
 
   <div class="field">
-    <p><%= f.label :city %></p>
+    <p><%= f.label :city, User.human_attribute_name(:city) %></p>
     <p><%= f.text_field :city, autofocus: true, autocomplete: "city" %></p>
   </div>
 
   <div class="field">
-    <p><%= f.label :street %></p>
+    <p><%= f.label :street, User.human_attribute_name(:street) %></p>
     <p><%= f.text_field :street, autofocus: true, autocomplete: "street" %></p>
   </div>
 
   <div class="field">
-    <p><%= f.label :introduction %></p>
+    <p><%= f.label :introduction, User.human_attribute_name(:introduction) %></p>
     <p><%= f.text_area :introduction, autofocus: true, autocomplete: "introduction" %></p>
   </div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+    <div><%= t('.currently_waiting_confirmation_for', email: resource.unconfirmed_email) %></div>
   <% end %>
 
   <div class="field">
-    <p><%= f.label :password %> <i>(leave blank if you don't want to change it)</i></p>
+    <p><%= f.label :password %> <i>(<%= t('.leave_blank_if_you_don_t_want_to_change_it') %>)</i></p>
     <p><%= f.password_field :password, autocomplete: "new-password" %></p>
     <% if @minimum_password_length %>
       <p><em><%= @minimum_password_length %> characters minimum</em></p>
@@ -51,17 +51,20 @@
   </div>
 
   <div class="field">
-    <p><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i></p>
+    <p><%= f.label :current_password %> <i>(<%= t('.we_need_your_current_password_to_confirm_your_changes') %>)</i></p>
     <p><%= f.password_field :current_password, autocomplete: "current-password" %></p>
   </div>
 
   <div class="actions">
-    <%= f.submit "Update" %>
+    <%= f.submit t('.update') %>
   </div>
 <% end %>
 
-<h3>Cancel my account</h3>
+<h3><%= t('.cancel_my_account') %></h3>
 
-<div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
+<div>
+  <%= t('.unhappy') %> 
+  <%= button_to t('.cancel_my_account'), registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %>
+</div>
 
-<%= link_to "Back", :back %>
+<%= link_to t('.back'), :back %>
