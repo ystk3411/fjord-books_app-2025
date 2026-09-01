@@ -11,7 +11,10 @@ class ReportsController < ApplicationController
     @report = Report.new
   end
 
-  def show; end
+  def show
+    @comments = Report.find(params[:id]).comments
+    @comment = Comment.new
+  end
 
   def create
     @report = current_user.reports.build(report_params)

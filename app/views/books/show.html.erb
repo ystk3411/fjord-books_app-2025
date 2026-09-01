@@ -10,3 +10,33 @@
 
   <%= button_to t('views.common.destroy', name: Book.model_name.human.downcase), @book, method: :delete %>
 </nav>
+
+<h2><%= t('views.common.comment') %></h2>
+
+<%= render partial: 'comments/comment', collection: @comments %>
+
+<%= form_with(model: @comment) do |form| %>
+  <% if @comment.errors.any? %>
+    <div style="color: red">
+      <h2><%= t('views.common.validation_error', errors: i18n_error_count(@comment.errors.count), name: Comment.model_name.human.downcase) %>:</h2>
+
+      <ul>
+        <% @comment.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label 'コメントを追加', style: "display: block" %>
+    <%= form.hidden_field :commentable_id, value: @book.id %>
+    <%= form.hidden_field :commentable_type, value: "Book" %>
+    <%= form.hidden_field :user_id, value: current_user.id %>
+    <%= form.text_area :content %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

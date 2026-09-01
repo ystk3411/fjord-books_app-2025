@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   resources :books
   resources :users, only: %i(index show)
   resources :reports
+  resources :comments
+  resources :reports do
+    resources :comments
+  end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
