@@ -1,0 +1,12 @@
+<% title = t('views.common.title_edit', name: Comment.model_name.human.downcase) %>
+<% content_for :title, title %>
+
+<h1><%= title %></h1>
+
+<%= render "form", comment: @comment %>
+
+<br>
+
+<nav class="page-nav">
+  <%= link_to t('views.common.cancel', name: Comment.model_name.human.downcase), @comment.commentable %>
+</nav>

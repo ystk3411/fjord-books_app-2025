@@ -1,14 +1,18 @@
-<h1><%= t('views.common.title_show', name: Book.model_name.human) %></h1>
+<h1><%= t('views.common.title_show', name: Report.model_name.human) %></h1>
 
 <div class="show-item">
-  <%= render @book %>
+  <%= render @report %>
 </div>
 
 <nav class="page-nav">
-  <%= link_to t('views.common.edit', name: Book.model_name.human.downcase), edit_book_path(@book) %> |
-  <%= link_to t('views.common.back', name: i18n_pluralize(Book.model_name.human.downcase)), books_path %>
+  <% if current_user == @report.user %>
+    <%= link_to t('views.common.edit', name: Report.model_name.human.downcase), edit_report_path(@report) %> |
+  <% end %>
+  <%= link_to t('views.common.back', name: i18n_pluralize(Report.model_name.human.downcase)), reports_path %>
 
-  <%= button_to t('views.common.destroy', name: Book.model_name.human.downcase), @book, method: :delete %>
+  <% if current_user == @report.user %>
+    <%= button_to t('views.common.destroy', name: Report.model_name.human.downcase), @report, method: :delete %>
+  <% end %>
 </nav>
 
 <h2><%= t('views.common.comment') %></h2>
@@ -30,8 +34,8 @@
 
   <div>
     <%= form.label 'コメントを追加', style: "display: block" %>
-    <%= form.hidden_field :commentable_id, value: @book.id %>
-    <%= form.hidden_field :commentable_type, value: "Book" %>
+    <%= form.hidden_field :commentable_id, value: @report.id %>
+    <%= form.hidden_field :commentable_type, value: "Report" %>
     <%= form.hidden_field :user_id, value: current_user.id %>
     <%= form.text_area :content %>
   </div>
