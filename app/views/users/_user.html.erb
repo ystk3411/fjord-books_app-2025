@@ -25,4 +25,10 @@
     <%= user.self_introduction %>
   </p>
 
+  <p>
+    <strong><%= User.human_attribute_name(:icon) %>:</strong>
+    <% if user.icon.attached? %>
+      <%= image_tag user.icon.variant(:thumb) %>
+    <% end %>
+  </p>
 </div>
