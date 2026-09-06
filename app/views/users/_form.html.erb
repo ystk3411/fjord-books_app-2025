@@ -1,0 +1,47 @@
+<%= form_with(model: user) do |form| %>
+  <% if user.errors.any? %>
+    <div style="color: red">
+      <h2><%= t('views.common.validation_error', errors: i18n_error_count(user.errors.count), name: User.model_name.human.downcase) %>:</h2>
+
+      <ul>
+        <% user.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :email, style: "display: block" %>
+    <%= form.text_field :email %>
+  </div>
+
+  <div>
+    <%= form.label :post_code, style: "display: block" %>
+    <%= form.text_field :post_code %>
+  </div>
+
+  <div>
+    <%= form.label :prefecture_code, style: "display: block" %>
+    <%= form.text_field :prefecture_code %>
+  </div>
+
+  <div>
+    <%= form.label :city, style: "display: block" %>
+    <%= form.text_field :city %>
+  </div>
+
+  <div>
+    <%= form.label :street, style: "display: block" %>
+    <%= form.text_field :street %>
+  </div>
+
+  <div>
+    <%= form.label :introduction, style: "display: block" %>
+    <%= form.text_area :introduction %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
