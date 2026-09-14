@@ -4,6 +4,17 @@
   <%= render @report %>
 </div>
 
+<% if @mentions.present? %>
+  <div class="mention-container">
+    この記事は以下の記事からリンクされています
+    <% @mentions.each do |mention| %>
+      <p>
+        <%= link_to mention.title, mention %> <%= l mention.created_on %>
+      </p>
+    <% end %>
+  </div>
+<% end %>
+
 <%= render 'application/comments', commentable: @report %>
 
 <nav class="page-nav">
