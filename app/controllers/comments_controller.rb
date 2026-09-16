@@ -4,10 +4,11 @@ class CommentsController < ApplicationController
   before_action :set_comment, only: %i[edit update destroy]
 
   def create
-    @comment = Comment.new(comment_params)
+    comment = Comment.new(comment_params)
+    comment.user = current_user
 
-    if @comment.save
-      redirect_to @comment.commentable, notice: t('controllers.common.notice_create', name: Comment.model_name.human)
+    if comment.save
+      redirect_to comment.commentable, notice: t('controllers.common.notice_create', name: Comment.model_name.human)
     else
       render 'reports/show', status: :unprocessable_entity
     end
@@ -38,6 +39,6 @@ class CommentsController < ApplicationController
   end
 
   def comment_params
-    params.expect(comment: %i[content commentable_id commentable_type user_id])
+    params.expect(comment: %i[content commentable_id commentable_type])
   end
 end
