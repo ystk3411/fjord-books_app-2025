@@ -26,8 +26,6 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @report = @comment.commentable
-
     @comment.destroy
 
     redirect_to @comment.commentable, notice: t('controllers.common.notice_destroy', name: Comment.model_name.human), status: :see_other
