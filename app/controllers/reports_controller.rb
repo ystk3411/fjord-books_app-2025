@@ -13,7 +13,7 @@ class ReportsController < ApplicationController
   end
 
   def show
-    @comments = Report.find(params[:id]).comments
+    @comments = @report.comments
     @comment = Comment.new
   end
 
