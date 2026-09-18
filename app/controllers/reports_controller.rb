@@ -2,6 +2,7 @@
 
 class ReportsController < ApplicationController
   before_action :set_report, only: %i[show edit update destroy]
+  before_action :ensure_correct_user, only: [:update, :destroy]
 
   def index
     @reports = Report.order(:id).page(params[:page])
@@ -50,5 +51,11 @@ class ReportsController < ApplicationController
 
   def report_params
     params.expect(report: %i[title content])
+  end
+
+  def ensure_correct_user
+    if @report.user_id != current_user.id
+      redirect_to @report, alert: t('errors.messages.invalid_user')
+    end
   end
 end

@@ -2,6 +2,7 @@
 
 class CommentsController < ApplicationController
   before_action :set_comment, only: %i[edit update destroy]
+  before_action :ensure_correct_user, only: [:update, :destroy]
 
   def create
     comment = Comment.new(comment_params)
@@ -40,5 +41,11 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.expect(comment: %i[content commentable_id commentable_type])
+  end
+
+  def ensure_correct_user
+    if @comment.user_id != current_user.id
+      redirect_to @report, alert: t('errors.messages.invalid_user')
+    end
   end
 end
