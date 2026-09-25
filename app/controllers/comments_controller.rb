@@ -44,6 +44,6 @@ class CommentsController < ApplicationController
   def ensure_correct_user
     return unless @comment.user_id != current_user.id
 
-    redirect_to @report, alert: t('errors.messages.invalid_user')
+    redirect_to @comment.commentable, alert: t('errors.messages.invalid_user')
   end
 end
