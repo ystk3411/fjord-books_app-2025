@@ -6,7 +6,7 @@
 
 <% if @mentions.present? %>
   <div class="mention-container">
-    この記事は以下の記事からリンクされています
+    <%= t('application.report.mention') %>
     <% @mentions.each do |mention| %>
       <p>
         <%= link_to mention.title, mention %> <%= l mention.created_on %>
