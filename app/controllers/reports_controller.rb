@@ -36,13 +36,9 @@ class ReportsController < ApplicationController
 
   def update
     ActiveRecord::Base.transaction do
-      ids_old = extract_local_urls(@report.content)
       ids_all_new = extract_local_urls(params[:report][:content])
-      ids_to_add = ids_all_new.without(ids_old)
-      ids_to_remove = ids_old.without(ids_all_new)
       @report.update!(report_params)
-      current_ids = @report.mentioning_report_ids
-      @report.mentioning_report_ids = (current_ids + ids_to_add - ids_to_remove).uniq
+      add_mentioning_reports(@report, ids_all_new)
     end
 
     redirect_to @report, notice: t('controllers.common.notice_update', name: Report.model_name.human)
@@ -72,6 +68,6 @@ class ReportsController < ApplicationController
   end
 
   def add_mentioning_reports(report, ids)
-    report.mentioning_report_ids = (report.mentioning_report_ids + ids).uniq
+    report.mentioning_report_ids = ids.uniq
   end
 end
