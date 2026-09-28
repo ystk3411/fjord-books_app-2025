@@ -9,6 +9,7 @@ class ReportsController < ApplicationController
 
   def show
     @report = Report.find(params[:id])
+    @mentions = @report.mentioned_reports.order(id: :desc)
   end
 
   def new
@@ -20,19 +21,31 @@ class ReportsController < ApplicationController
   def create
     @report = current_user.reports.new(report_params)
 
-    if @report.save
+    begin
+      ActiveRecord::Base.transaction do
+        @report.save!
+        ids_all_new = extract_local_urls(@report.content)
+        ids_to_add = filter_reports_id(ids_all_new, @report.id)
+        add_mentioning_reports(@report, ids_to_add)
+      end
+
       redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
-    else
+    rescue ActiveRecord::RecordInvalid
       render :new, status: :unprocessable_entity
     end
   end
 
   def update
-    if @report.update(report_params)
-      redirect_to @report, notice: t('controllers.common.notice_update', name: Report.model_name.human)
-    else
-      render :edit, status: :unprocessable_entity
+    ActiveRecord::Base.transaction do
+      @report.update!(report_params)
+      ids_all_new = extract_local_urls(params[:report][:content])
+      ids_to_add = filter_reports_id(ids_all_new, @report.id)
+      add_mentioning_reports(@report, ids_to_add)
     end
+
+    redirect_to @report, notice: t('controllers.common.notice_update', name: Report.model_name.human)
+  rescue ActiveRecord::RecordInvalid
+    render :new, status: :unprocessable_entity
   end
 
   def destroy
@@ -49,5 +62,18 @@ class ReportsController < ApplicationController
 
   def report_params
     params.expect(report: %i[user_id title content])
+  end
+
+  def extract_local_urls(text)
+    local_url_regex = %r{http://127\.0\.0\.1:3000[\w?=&./~:-]*?/(\d+)}
+    text.scan(local_url_regex).flatten.map(&:to_i).uniq
+  end
+
+  def filter_reports_id(ids_all_new, report_id)
+    ids_all_new.reject { |id| id == report_id }
+  end
+
+  def add_mentioning_reports(report, ids)
+    report.mentioning_report_ids = ids.uniq
   end
 end
