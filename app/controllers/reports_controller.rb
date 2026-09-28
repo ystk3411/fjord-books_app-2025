@@ -24,8 +24,9 @@ class ReportsController < ApplicationController
     begin
       ActiveRecord::Base.transaction do
         @report.save!
-        ids = extract_local_urls(@report.content)
-        add_mentioning_reports(@report, ids)
+        ids_all_new = extract_local_urls(@report.content)
+        ids_to_add = filter_reports_id(ids_all_new, @report.id)
+        add_mentioning_reports(@report, ids_to_add)
       end
 
       redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
@@ -36,9 +37,10 @@ class ReportsController < ApplicationController
 
   def update
     ActiveRecord::Base.transaction do
-      ids_all_new = extract_local_urls(params[:report][:content])
       @report.update!(report_params)
-      add_mentioning_reports(@report, ids_all_new)
+      ids_all_new = extract_local_urls(params[:report][:content])
+      ids_to_add = filter_reports_id(ids_all_new, @report.id)
+      add_mentioning_reports(@report, ids_to_add)
     end
 
     redirect_to @report, notice: t('controllers.common.notice_update', name: Report.model_name.human)
@@ -65,6 +67,10 @@ class ReportsController < ApplicationController
   def extract_local_urls(text)
     local_url_regex = %r{http://127\.0\.0\.1:3000[\w?=&./~:-]*?/(\d+)}
     text.scan(local_url_regex).flatten.map(&:to_i).uniq
+  end
+
+  def filter_reports_id(ids_all_new, report_id)
+    ids_all_new.reject { |id| id == report_id }
   end
 
   def add_mentioning_reports(report, ids)
