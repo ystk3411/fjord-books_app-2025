@@ -3,10 +3,16 @@
 require 'test_helper'
 
 class ReportTest < ActiveSupport::TestCase
-  test '#editable?' do
+  test '#editable? returns true' do
     user = users(:alice)
     report = user.reports.new(content: 'テスト用日報')
     assert report.editable?(user)
+  end
+
+  test '#editable? returns false' do
+    user = users(:alice)
+    report = user.reports.new(content: 'テスト用日報')
+    refute report.editable?(:bob)
   end
 
   test '#created_on' do
