@@ -12,7 +12,7 @@ class ReportTest < ActiveSupport::TestCase
   test '#editable? returns false' do
     user = users(:alice)
     report = user.reports.new(content: 'テスト用日報')
-    refute report.editable?(:bob)
+    assert_not report.editable?(:bob)
   end
 
   test '#created_on' do
@@ -37,7 +37,7 @@ class ReportTest < ActiveSupport::TestCase
     report_mentioning = user.reports.create!(title: '言及元日報', content: "http://localhost:3000/reports/#{report_mentioned_keep.id}、http://localhost:3000/reports/#{report_mentioned_delete.id}")
     report_mentioning.update(title: '日報を更新', content: "http://localhost:3000/reports/#{report_mentioned_keep.id}、http://localhost:3000/reports/#{report_mentioned_add.id}")
     report_mentioning.reload
-    refute_equal report_mentioning.mentioning_reports[1], report_mentioned_delete
+    assert_not_equal report_mentioning.mentioning_reports[1], report_mentioned_delete
     assert_equal report_mentioning.mentioning_reports[0], report_mentioned_keep
     assert_equal report_mentioning.mentioning_reports[1], report_mentioned_add
   end
