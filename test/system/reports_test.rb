@@ -20,6 +20,7 @@ class ReportsTest < ApplicationSystemTestCase
     fill_in '内容', with: 'テスト用日報です。'
     click_button '登録する'
     assert_text '日報が作成されました。'
+    assert_text 'テスト用日報です。'
   end
 
   test '#edit report' do
@@ -29,11 +30,15 @@ class ReportsTest < ApplicationSystemTestCase
     fill_in '内容', with: 'テスト用日報を更新。'
     click_button '更新する'
     assert_text '日報が更新されました。'
+    assert_text 'テスト用日報を更新。'
   end
 
   test '#destroy report' do
     visit report_path(@report)
     click_button 'この日報を削除'
     assert_text '日報が削除されました。'
+    assert_raise(ActiveRecord::RecordNotFound) do
+      Report.find(@report.id)
+    end
   end
 end
